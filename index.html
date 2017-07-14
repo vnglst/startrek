@@ -1,12 +1,44 @@
 <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
 
-<body style=margin:0>
-    <canvas id=starfield />
-    <audio id='enginesound' src='sounds/tng_room.mp3' autoplay loop />
+
+<style type="text/css">
+    /* Font source: http://www.fontspace.com/pixel-sagas/roddenberry */
+
+    @font-face {
+        font-family: "Roddenberry";
+        src: url('fonts/Roddenberry Bold Italic.otf');
+    }
+
+    body {
+        margin: 0;
+        background-color: black;
+    }
+
+    #starfield {
+        filter: blur(1px);
+        -webkit-filter: blur(1px);
+    }
+
+    #star-trek-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #38A0E1;
+        font-size: 100px;
+        font-family: 'Roddenberry', Verdana, Tahoma;
+    }
+</style>
+
+<body>
+    <canvas id="starfield"></canvas>
+    <!-- Source engine sound: http://www.trekcore.com/audio/  -->
+    <audio id='enginesound' src='sounds/tng_room.mp3' autoplay loop></audio>
+    <div id='star-trek-logo'>STAR TREK</div>
     <script>
         // Star types and their colors
         // Source: http://www.vendian.org/mncharity/dir3/starcolor/
-        const starTypes = [{
+        var starTypes = [{
                 type: 'O',
                 trueColor: 'rgb(155, 176, 255)',
                 visibleColor: 'rgb(195, 195, 195)'
@@ -45,13 +77,14 @@
 
         var starfield = document.getElementById('starfield');
         var engineSound = document.getElementById('enginesound');
+        var starTrekLogo = document.getElementById('star-trek-logo');
         var scr = window.screen;
         var width = starfield.width = scr.width;
         var height = starfield.height = scr.height;
         var numberOfStars = width / 5;
         var xSpeedModifier = 0.25;
         var ySpeedModifier = 0;
-        var showTrueColors = true;
+        var showTrueColors = false;
 
         // Moving the mouse across the canves changes x and y speed
         function handleMouseMove(p) {
@@ -60,9 +93,9 @@
             xSpeedModifier = (p.pageX - (width / 2)) / width * 2;
             ySpeedModifier = (p.pageY - (height / 2)) / height * 2;
         }
-        starfield.addEventListener('mousemove', handleMouseMove, false);
-        starfield.addEventListener('touchstart', handleMouseMove, false);
-        starfield.addEventListener('touchmove', handleMouseMove, false);
+        starfield.addEventListener('mousemove', handleMouseMove);
+        starfield.addEventListener('touchstart', handleMouseMove);
+        starfield.addEventListener('touchmove', handleMouseMove);
 
         // Get random element from array
         getRandomElement = function (arr) {
@@ -101,31 +134,24 @@
         addNStars(numberOfStars);
 
         // clicking on the canvas adds stars
-        function handleClickEvent(e) {
+        function handleStarfieldClick(e) {
             e.preventDefault();
             addNStars(100);
         }
 
-        starfield.addEventListener('click', handleClickEvent, false)
+        starfield.addEventListener('click', handleStarfieldClick)
 
-        function handleMouseEnter(e) {
+        function handleLogoClick(e) {
             e.preventDefault();
-            showTrueColors = true;
+            showTrueColors = !showTrueColors;
         }
 
-        function handleMouseLeave(e) {
-            e.preventDefault();
-            showTrueColors = false;
-        }
+        starTrekLogo.addEventListener('click', handleLogoClick)
 
-        // Toggles visible and true colors on leaving/entering canvas
-        starfield.addEventListener('mouseenter', handleMouseEnter, false)
-        starfield.addEventListener('mouseleave', handleMouseLeave, false)
-
+        var ctx = starfield.getContext('2d');
+        // ctx.filter = 'blur(5px)';
 
         function draw() {
-            var ctx = starfield.getContext('2d');
-
             // Redraw screen in black with alpha channel for fading of stars
             ctx.fillStyle = 'rgba(0, 0, 0, .2)';
             ctx.fillRect(0, 0, width, height);
@@ -152,12 +178,11 @@
                     star.y = height - 1 :
                     star.y + (ySpeedModifier * star.ySpeed);
                 star.y = star.y % height
-
             });
         };
 
         // Call function draw with an interval
-        setInterval(draw, 10);
+        setInterval(draw, 30);
     </script>
 
     <script>

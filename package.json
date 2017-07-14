@@ -1,7 +1,7 @@
 {
-  "name": "interactive-starfield",
+  "name": "startrek",
   "version": "1.0.0",
-  "description": "An Interactive Starfield",
+  "description": "Star Trek Starfield",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,15 +10,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vnglst/starfield.git"
+    "url": "git+https://github.com/vnglst/startrek.git"
   },
   "keywords": [],
   "author": "Koen van Gilst <koen.vangilst@gmail.com> (http://koenvangilst.nl)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vnglst/starfield/issues"
+    "url": "https://github.com/vnglst/startrek/issues"
   },
-  "homepage": "https://github.com/vnglst/starfield#readme",
+  "homepage": "https://github.com/vnglst/startrek#readme",
   "devDependencies": {
     "browser-sync": "^2.18.12"
   }

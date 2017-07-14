@@ -15,8 +15,8 @@
     }
 
     #starfield {
-        filter: blur(1px);
-        -webkit-filter: blur(1px);
+        filter: blur(2px);
+        -webkit-filter: blur(2px);
     }
 
     #star-trek-logo {
@@ -24,9 +24,16 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
+        transition: 1.5s ease;
         color: #38A0E1;
         font-size: 100px;
         font-family: 'Roddenberry', Verdana, Tahoma;
+        cursor: pointer;
+    }
+
+    #star-trek-logo:hover {
+        transition: 1.5s ease;
+        transform: translate(-50%, -50%) scale(1.2);
     }
 </style>
 
@@ -82,7 +89,7 @@
         var width = starfield.width = scr.width;
         var height = starfield.height = scr.height;
         var numberOfStars = width / 5;
-        var xSpeedModifier = 0.25;
+        var xSpeedModifier = 0.5;
         var ySpeedModifier = 0;
         var showTrueColors = false;
 
@@ -107,7 +114,7 @@
 
         // creates one star
         function createStar() {
-            var speed = Math.random() * 1.5 + 0.5;
+            var speed = Math.random() * 3.5 + 0.5;
             var starType = getRandomElement(starTypes)
             return {
                 trueColor: starType.trueColor,

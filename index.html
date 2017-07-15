@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Star Trek</title>
@@ -71,12 +72,11 @@
         color: rgb(195, 195, 195);
         font-family: Arial, Helvetica, sans-serif;
     }
-
 </style>
 
 <body>
     <canvas id="starfield"></canvas>
-    <!-- source engine sound: http://www.trekcore.com/audio/  -->
+    <!-- source engine sound: http://www.trekcore.com/audio/   -->
     <audio id='enginesound' src='sounds/tng_room.mp3' autoplay loop></audio>
     <div id='star-trek-logo'>STAR TREK</div>
     <a id='source' href="https://github.com/vnglst/startrek">source</a>
@@ -185,7 +185,15 @@
             addNStars(100);
         }
 
+        // force touch on iPhone also adds stars
+        function handleForceTouch(e) {
+            e.preventDefault();
+            var force = e.changedTouches[0].force;
+            if (force >= 1) addNStars(100);
+        }
+
         starfield.addEventListener('click', handleStarfieldClick)
+        starfield.addEventListener('touchforcechange', handleForceTouch)
 
         // toggles true color stars (i.e. real colors of stars)
         function handleLogoClick(e) {

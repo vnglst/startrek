@@ -132,16 +132,15 @@
         var showTrueColors = false;
 
         // moving the mouse across the canves changes x and y speed
-        function handleMouseMove(p) {
-            p.preventDefault();
+        function followCursor(p) {
             // autoplay for mobile browsers ;-)
             if (engineSound.paused) engineSound.play();
             xSpeedModifier = (p.pageX - (width / 2)) / width * 2;
             ySpeedModifier = (p.pageY - (height / 2)) / height * 2;
         }
-        document.body.addEventListener('mousemove', handleMouseMove);
-        document.body.addEventListener('touchstart', handleMouseMove);
-        document.body.addEventListener('touchmove', handleMouseMove);
+        document.body.addEventListener('mousemove', followCursor);
+        document.body.addEventListener('touchstart', followCursor);
+        document.body.addEventListener('touchmove', followCursor);
 
         // get random element from array
         getRandomElement = function (arr) {
@@ -182,13 +181,11 @@
 
         // clicking on the canvas adds stars
         function handleStarfieldClick(e) {
-            e.preventDefault();
             addNStars(100);
         }
 
         // force touch on iPhone also adds stars
         function handleForceTouch(e) {
-            e.preventDefault();
             var force = e.changedTouches[0].force;
             if (force >= 1) addNStars(100);
         }

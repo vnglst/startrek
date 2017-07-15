@@ -139,9 +139,9 @@
             xSpeedModifier = (p.pageX - (width / 2)) / width * 2;
             ySpeedModifier = (p.pageY - (height / 2)) / height * 2;
         }
-        starfield.addEventListener('mousemove', handleMouseMove);
-        starfield.addEventListener('touchstart', handleMouseMove);
-        starfield.addEventListener('touchmove', handleMouseMove);
+        document.body.addEventListener('mousemove', handleMouseMove);
+        document.body.addEventListener('touchstart', handleMouseMove);
+        document.body.addEventListener('touchmove', handleMouseMove);
 
         // get random element from array
         getRandomElement = function (arr) {
@@ -193,8 +193,8 @@
             if (force >= 1) addNStars(100);
         }
 
-        starfield.addEventListener('click', handleStarfieldClick)
-        starfield.addEventListener('touchforcechange', handleForceTouch)
+        document.body.addEventListener('click', handleStarfieldClick)
+        document.body.addEventListener('touchforcechange', handleForceTouch)
 
         // toggles true color stars (i.e. real colors of stars)
         function handleLogoClick(e) {

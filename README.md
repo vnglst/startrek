@@ -1,5 +1,12 @@
 # Star Trek Intro CSS3 + HTML5 Demo
 
+## Features
+
+- stars follow your cursor
+- click in starfield adds 100 more stars (3D Touch, i.e. 'press really hard' on iPhone)
+- click on STAR TREK toggles true color stars
+- turn up your speaker volume and listen to those beautiful Enterprise engines
+
 ## Development
 
 ````

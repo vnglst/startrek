@@ -15,11 +15,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
     }
 
     #starfield {
         filter: blur(2px);
-        -webkit-filter: blur(2px);
         position: absolute;
         top: 0;
         left: 0;
@@ -31,7 +35,7 @@
     #star-trek-logo {
         padding: 10px;
         z-index: 2;
-        max-width: 50%; 
+        max-width: 50%;
         color: #38A0E1;
         font-size: 80px;
         font-family: 'Roddenberry', Verdana, Tahoma;

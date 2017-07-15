@@ -12,28 +12,41 @@
     body {
         margin: 0;
         background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     #starfield {
         filter: blur(2px);
         -webkit-filter: blur(2px);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
     }
 
     #star-trek-logo {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        transition: 1.5s ease;
+        z-index: 2;
+        max-width: 50%; 
         color: #38A0E1;
-        font-size: 100px;
+        font-size: 80px;
         font-family: 'Roddenberry', Verdana, Tahoma;
+        text-align: center;
         cursor: pointer;
+        animation: zoom 0.5s 1 ease-out;
+        overflow: visible;
     }
 
-    #star-trek-logo:hover {
-        transition: 1.5s ease;
-        transform: translate(-50%, -50%) scale(1.2);
+    @keyframes zoom {
+        0% {
+            transform: scale(15);
+        }
+        100% {
+            transform: scale(1);
+        }
     }
 </style>
 
@@ -88,7 +101,7 @@
         var scr = window.screen;
         var width = starfield.width = scr.width;
         var height = starfield.height = scr.height;
-        var numberOfStars = width / 5;
+        var numberOfStars = width / 10;
         var xSpeedModifier = 0.5;
         var ySpeedModifier = 0;
         var showTrueColors = false;

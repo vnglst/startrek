@@ -211,7 +211,7 @@
             ctx.fillRect(0, 0, width, height);
 
             // loop through all stars, draw them and add +1 to position
-            stars.map(function (star, index) {
+            stars.forEach(function (star, index) {
 
                 // star color
                 ctx.fillStyle = showTrueColors ? star.trueColor : star.visibleColor;

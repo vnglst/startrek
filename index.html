@@ -115,7 +115,7 @@
         var scr = window.screen;
         var width = starfield.width = scr.width;
         var height = starfield.height = scr.height;
-        var numberOfStars = width / 10;
+        var numberOfStars = width / 5;
         var xSpeedModifier = 0.5;
         var ySpeedModifier = 0;
         var showTrueColors = false;
@@ -131,7 +131,7 @@
         starfield.addEventListener('touchstart', handleMouseMove);
         starfield.addEventListener('touchmove', handleMouseMove);
 
-        // Get random element from array
+        // get random element from array
         getRandomElement = function (arr) {
             return arr[Math.floor((Math.random() * arr.length))];
         }
@@ -142,6 +142,7 @@
         // creates one star
         function createStar() {
             var speed = Math.random() * 3.5 + 0.5;
+            // get random star type (mainly color/brightness)
             var starType = getRandomElement(starTypes)
             return {
                 trueColor: starType.trueColor,
@@ -175,6 +176,7 @@
 
         starfield.addEventListener('click', handleStarfieldClick)
 
+        // toggles true color stars (i.e. real colors of stars)
         function handleLogoClick(e) {
             e.preventDefault();
             showTrueColors = !showTrueColors;
@@ -183,7 +185,6 @@
         starTrekLogo.addEventListener('click', handleLogoClick)
 
         var ctx = starfield.getContext('2d');
-        // ctx.filter = 'blur(5px)';
 
         function draw() {
             // Redraw screen in black with alpha channel for fading of stars
@@ -213,10 +214,12 @@
                     star.y + (ySpeedModifier * star.ySpeed);
                 star.y = star.y % height
             });
+            // Recusively animate stars
+            window.requestAnimationFrame(draw);
         };
 
-        // Call function draw with an interval
-        setInterval(draw, 30);
+        // Start animating stars
+          window.requestAnimationFrame(draw);
     </script>
 
     <script>

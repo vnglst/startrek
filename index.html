@@ -62,16 +62,22 @@
         }
     }
 
-    a#source {
+    #source {
         z-index: 2;
         position: absolute;
         bottom: 0;
         right: 0;
         padding: 5px;
         font-size: 16px;
-        color: rgb(195, 195, 195);
-        font-family: Arial, Helvetica, sans-serif;
         text-decoration: none;
+    }
+
+    #source:hover span {
+        display: none;
+    }
+
+    #source:hover:before {
+        content: '✋🏽';
     }
 </style>
 
@@ -80,7 +86,7 @@
     <!-- source engine sound: http://www.trekcore.com/audio/   -->
     <audio id='enginesound' src='sounds/tng_room.mp3' autoplay loop></audio>
     <div id='star-trek-logo'>STAR TREK</div>
-    <a id='source' href="https://github.com/vnglst/startrek">🖖🏽</a>
+    <a href="https://github.com/vnglst/startrek" id='source'><span>🖖🏽</span></a>
     <script>
         // star types and their colors
         // source: http://www.vendian.org/mncharity/dir3/starcolor/

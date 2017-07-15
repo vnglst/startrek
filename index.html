@@ -8,7 +8,7 @@
 </head>
 
 <style type="text/css">
-    /* Font source: http://www.fontspace.com/pixel-sagas/roddenberry */
+    /* font source: http://www.fontspace.com/pixel-sagas/roddenberry */
 
     @font-face {
         font-family: "Roddenberry";
@@ -64,12 +64,13 @@
 
 <body>
     <canvas id="starfield"></canvas>
-    <!-- Source engine sound: http://www.trekcore.com/audio/  -->
+    <!-- source engine sound: http://www.trekcore.com/audio/  -->
     <audio id='enginesound' src='sounds/tng_room.mp3' autoplay loop></audio>
     <div id='star-trek-logo'>STAR TREK</div>
+    <div id='credits'></div>
     <script>
-        // Star types and their colors
-        // Source: http://www.vendian.org/mncharity/dir3/starcolor/
+        // star types and their colors
+        // source: http://www.vendian.org/mncharity/dir3/starcolor/
         var starTypes = [{
                 type: 'O',
                 trueColor: 'rgb(155, 176, 255)',
@@ -110,17 +111,17 @@
         var starfield = document.getElementById('starfield');
         var engineSound = document.getElementById('enginesound');
         var starTrekLogo = document.getElementById('star-trek-logo');
-        var scr = window.screen;
-        var width = starfield.width = scr.width;
-        var height = starfield.height = scr.height;
+        var width = starfield.width = window.innerWidth;
+        var height = starfield.height = window.innerHeight;
         var numberOfStars = width / 5;
         var xSpeedModifier = 0.5;
         var ySpeedModifier = 0;
         var showTrueColors = false;
 
-        // Moving the mouse across the canves changes x and y speed
+        // moving the mouse across the canves changes x and y speed
         function handleMouseMove(p) {
             p.preventDefault();
+            // autoplay for mobile browsers ;-)
             if (engineSound.paused) engineSound.play();
             xSpeedModifier = (p.pageX - (width / 2)) / width * 2;
             ySpeedModifier = (p.pageY - (height / 2)) / height * 2;
@@ -134,7 +135,7 @@
             return arr[Math.floor((Math.random() * arr.length))];
         }
 
-        // Create an empty array of stars
+        // create an empty array of stars
         var stars = [];
 
         // creates one star
@@ -185,23 +186,23 @@
         var ctx = starfield.getContext('2d');
 
         function draw() {
-            // Redraw screen in black with alpha channel for fading of stars
+            // redraw screen in black with alpha channel for fading of stars
             ctx.fillStyle = 'rgba(0, 0, 0, .2)';
             ctx.fillRect(0, 0, width, height);
 
-            // Loop through all stars, draw them and add +1 to position
+            // loop through all stars, draw them and add +1 to position
             stars.map(function (star, index) {
 
-                // Star color
+                // star color
                 ctx.fillStyle = showTrueColors ? star.trueColor : star.visibleColor;
 
-                // Plot star
+                // plot star
                 ctx.beginPath();
                 ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2, true);
                 ctx.closePath();
                 ctx.fill()
 
-                // Increase star position with speed, check edges
+                // increase star position with speed, check edges
                 star.x = star.x < 0 ?
                     star.x = width - 1 :
                     star.x + (xSpeedModifier * star.xSpeed);
@@ -212,11 +213,11 @@
                     star.y + (ySpeedModifier * star.ySpeed);
                 star.y = star.y % height
             });
-            // Recusively animate stars
+            // recusively animate stars
             window.requestAnimationFrame(draw);
         };
 
-        // Start animating stars
+        // start animating stars
         window.requestAnimationFrame(draw);
     </script>
 

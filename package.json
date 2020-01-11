@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/vnglst/startrek#readme",
   "devDependencies": {
-    "browser-sync": "^2.18.12"
+    "browser-sync": "^2.26.7"
   }
 }

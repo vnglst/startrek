@@ -11,13 +11,6 @@
   </head>
 
   <style type="text/css">
-    /* font source: http://www.fontspace.com/pixel-sagas/roddenberry */
-
-    @font-face {
-      font-family: "Roddenberry";
-      src: url("fonts/roddenberry_bold_italic.otf");
-    }
-
     body {
       margin: 0;
       background-color: black;
@@ -85,8 +78,6 @@
 
   <body>
     <canvas id="starfield"></canvas>
-    <!-- source engine sound: http://www.trekcore.com/audio/   -->
-    <audio id="enginesound" src="sounds/tng_room.mp3" autoplay loop></audio>
     <div id="star-trek-logo">STAR TREK</div>
     <a href="https://github.com/vnglst/startrek" id="source"><span>🖖🏽</span></a>
     <script>
@@ -130,8 +121,8 @@
         }
       ];
 
+      var engineSound;
       var starfield = document.getElementById("starfield");
-      var engineSound = document.getElementById("enginesound");
       var starTrekLogo = document.getElementById("star-trek-logo");
       var width = (starfield.width = window.innerWidth);
       var height = (starfield.height = window.innerHeight);
@@ -142,14 +133,20 @@
 
       // moving the mouse across the canves changes x and y speed
       function followCursor(p) {
-        // autoplay for mobile browsers ;-)
-        if (engineSound.paused) engineSound.play();
         xSpeedModifier = ((p.pageX - width / 2) / width) * 2;
         ySpeedModifier = ((p.pageY - height / 2) / height) * 2;
       }
+      
       document.body.addEventListener("mousemove", followCursor);
-      document.body.addEventListener("touchstart", followCursor);
       document.body.addEventListener("touchmove", followCursor);
+      
+      function playSound() {
+        if(!engineSound) engineSound = document.getElementById("enginesound");
+        engineSound.play();
+      }
+
+      document.body.addEventListener("click", playSound);
+      document.body.addEventListener("touchstart", playSound);
 
       // get random element from array
       getRandomElement = function(arr) {
@@ -248,5 +245,16 @@
       // start animating stars
       window.requestAnimationFrame(draw);
     </script>
+    <!-- source engine sound: http://www.trekcore.com/audio/ -->
+    <audio id="enginesound" src="sounds/tng_room.mp3" loop></audio>
+
+    <style type="text/css">
+      /* font source: http://www.fontspace.com/pixel-sagas/roddenberry */
+  
+      @font-face {
+        font-family: "Roddenberry";
+        src: url("fonts/roddenberry_bold_italic.otf");
+      }
+    </style>
   </body>
 </html>
